@@ -1,0 +1,4 @@
+asgiref==3.8.1
+Django==5.1.3
+sqlparse==0.5.1
+pytz==2023.3  # Only needed if your project uses time zones
