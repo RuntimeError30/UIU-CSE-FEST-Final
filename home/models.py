@@ -20,8 +20,6 @@ class announcements(models.Model):
     lastUpdate = models.DateField()
 
 
-
-
 class timeLine(models.Model):
     event = models.ForeignKey(events, on_delete=models.CASCADE)
     timeline_01 = models.CharField(max_length=100, default="",null=True, blank=True)
