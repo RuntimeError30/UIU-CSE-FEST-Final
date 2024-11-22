@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 0.375rem;
+            border: 1px solid #e5e7eb;
+            background-color: #f3f4f6;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9l-7 7-7-7"></path></svg>');
+            background-repeat: no-repeat;
+            background-position: right 1rem top 50%;
+            background-size: 1.5em;
+        }
+
+        /* Instructions Section */
+        .instructions-container h2 {
+            font-size: 1.25rem;
+            /* Slightly smaller than the main headers */
+            font-weight: bold;
+            color: #4a5568;
+            /* Tailwind's gray-700 */
+            margin-bottom: 1rem;
+        }
+
+        .instructions-container ul {
+            margin-top: 1rem;
+            padding-left: 1rem;
+            /* Adds spacing for list bullets */
+            color: #718096;
+            /* Tailwind's gray-600 */
+            font-size: 0.875rem;
+            /* Smaller font size */
+            line-height: 1.5rem;
+            /* Improves readability */
+        }
+
+        .instructions-container li {
+            margin-bottom: 0.5rem;
+            /* Adds space between each list item */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="border-b border-white/10 backdrop-blur-xl bg-black/50 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <a href="/" class="text-xl font-bold text-vibrant-orange">
+                        UIU CSE FEST 2025
+                    </a>
+                </div>
+                <a href="/" class="text-white hover:text-vibrant-orange transition-colors inline-flex items-center">
+                    Back to Home
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="bg-gray-10 flex items-center justify-center">
+        <div class="p-10 max-w-7xl w-full">
+            <h1 class="mb-8 font-extrabold text-4xl text-center"><i class="bi bi-microsoft-teams mx-2"></i> Register Your Team</i></h1>
+            <hr class="mb-5">
+            <form>
+                <!-- First Row: Team Details and Instructions -->
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Team Details Form -->
+                    <div class="flex-1 bg-white p-6 rounded-lg shadow-md">
+                        <h2 class="font-bold text-gray-700 mb-4 text-left" style="font-size: larger !important;"><i class="bi bi-clipboard-data-fill mx-2"></i> Team Details</h2>
+                        <hr>
+                        <br>
+                        <div>
+                            <label class="block font-semibold text-gray-700" for="team-name">Team Name</label>
+                            <input class="w-full shadow-inner bg-gray-100 rounded-lg text-lg p-4 mt-1 border-none"
+                                id="team-name" type="text" name="team-name" required placeholder="Team XYZ ..." />
+                        </div>
+                        <div class="mt-4">
+                            <label class="block font-semibold text-gray-700" for="institute-name">University/Institute
+                                Name</label>
+                            <input class="w-full shadow-inner bg-gray-100 rounded-lg text-lg p-4 mt-1 border-none"
+                                id="institute-name" type="text" name="institute-name" required
+                                placeholder="e.g. United International University ..." />
+                        </div>
+                    </div>
+
+                    <!-- Instructions -->
+                    <aside class="hidden lg:flex bg-gray-100 p-6 rounded-lg shadow-md">
+                        <div class="instructions-container">
+                            <h2 class="font-bold text-xl text-gray-700"><i class="bi bi-asterisk mx-2"></i> Instructions</h2>
+                            <hr>
+                            <ul class="list-disc mt-4 list-inside text-gray-600">
+                                <li>Provide complete and accurate information.</li>
+                                <li>Keep team and institute names consistent.</li>
+                                <li>Use valid email and phone for communication.</li>
+                                <li>Upload documents in clear, readable formats.</li>
+                                <li>Select roles for all team members correctly.</li>
+                                <li>Choose the right T-shirt size carefully.</li>
+                                <li>Add members before submitting the form.</li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+
+                <div class="mt-10 grid grid-cols-1 gap-8" id="member-fields">
+                    <!-- Initial Member Card -->
+                    <div class="bg-white rounded-lg shadow-md p-6 w-full">
+                        <div class="flex">
+                            <i class="bi bi-person-lines-fill mx-2"></i>
+                            <h2 class="text-xl font-semibold text-gray-700 mb-4 text-center" style="font-size: larger !important;" id="team">Team Member - 1</h2>
+                        </div>
+                        <hr>
+                        <br>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            <div>
+                                <label for="fullName-member-1" class="block text-sm font-medium text-gray-700">Full Name</label>
+                                <input type="text" id="fullName-member-1" name="fullName-member-1"
+                                    class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
+                                    placeholder="Enter your full name" required />
+                            </div>
+                
+                            <div>
+                                <label for="email-member-1" class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" id="email-member-1" name="email-member-1"
+                                    class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
+                                    placeholder="Enter your email" required />
+                            </div>
+                
+                            <div>
+                                <label for="phone-member-1" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                                <input type="tel" id="phone-member-1" name="phone-member-1"
+                                    class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
+                                    placeholder="Enter your phone number" required />
+                            </div>
+                
+                            <div>
+                                <label for="tshirtSize-member-1" class="block text-sm font-medium text-gray-700">T-shirt Size</label>
+                                <select id="tshirtSize-member-1" name="tshirtSize-member-1"
+                                    class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
+                                    required>
+                                    <option value="" disabled selected>Select T-shirt size</option>
+                                    <option value="S">Small (S)</option>
+                                    <option value="M">Medium (M)</option>
+                                    <option value="L">Large (L)</option>
+                                    <option value="XL">Extra Large (XL)</option>
+                                    <option value="XXL">Double Extra Large (XXL)</option>
+                                </select>
+                            </div>
+                
+                            <div>
+                                <label for="studentIdCard-member-1" class="block text-sm font-medium text-gray-700">Student ID Card (PDF)</label>
+                                <input type="file" id="studentIdCard-member-1" name="studentIdCard-member-1" accept="application/pdf"
+                                    class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
+                                    required />
+                                <p class="mt-1 text-sm text-gray-500">Upload your student ID as a PDF file.</p>
+                            </div>
+                
+                            <div>
+                                <label for="studentImage-member-1" class="block text-sm font-medium text-gray-700">Student Image</label>
+                                <input type="file" id="studentImage-member-1" name="studentImage-member-1" accept="image/*"
+                                    class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
+                                    required />
+                                <p class="mt-1 text-sm text-gray-500">Upload a recent photo (JPEG, PNG).</p>
+                            </div>
+                        </div>
+                
+                        <div class="mt-3">
+                            <label for="role-member-1" class="block text-sm font-medium text-gray-700">Role</label>
+                            <select id="role-member-1" name="role-member-1"
+                                class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
+                                required>
+                                <option value="" disabled selected>Select role</option>
+                                <option value="member">Member</option>
+                                <option value="leader">Leader</option>
+                                <option value="coach">Coach</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my-3 flex justify-end">
+                    <button id="add-member-btn" type="button"
+                        class="bg-black text-white px-3 py-3 rounded-md shadow hover:bg-orange-600">
+                        <i class="bi bi-person-fill-add mx-2"></i> Add Member
+                    </button>
+                </div>
+
+                <div class="my-5 py-5"></div>
+
+                <!-- Add Member and Submit Buttons -->
+                <div class="flex justify-center mt-12 gap-4 my-5">
+                    <div class="text-center">
+                        <button type="submit"
+                            class="bg-black text-white px-6 py-3 rounded-md shadow hover:bg-orange-600 ml-4" id="reg-btn">
+                            <span style="font-size: x-large !important;"><i class="bi bi-microsoft-teams mx-2"></i> Register Team</span>
+                        </button>
+                        <p class="mt-3 bg-black rounded px-3" style="color: white;" id="warn-text">*** Please add minimum number of members to register !</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <div style="min-height: 80px;"></div>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8">
+        <div class="container mx-auto px-6 flex justify-between items-center flex-col md:flex-row">
+            <!-- Logo and Brand Info -->
+            <div class="flex items-center gap-4">
+                <h1 class="text-xl font-bold">UIU CSE Fest 2025</h1>
+            </div>
+            <!-- Quick Links -->
+            <div
+                class="flex justify-center items-center gap-5 md:gap-10 md:text-xl md:space-y-0 md:space-x-10 text-center md:text-left">
+                <ul>
+                    <li>
+                        <a href="#" class="hover:text-gray-400">Home</a>
+                    </li>
+                    <li>
+                        <a href="#about" class="hover:text-gray-400">About</a>
+                    </li>
+                    <li>
+                        <a href="#events" class="hover:text-gray-400">Events</a>
+                    </li>
+                    <li>
+
+                        <a href="eventcredits/" class="hover:text-gray-400">Gratitude</a>
+
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a href="#" class="hover:text-gray-400">Contact</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:text-gray-400">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:text-gray-400">Terms of Service</a>
+                    </li>
+                    <li>
+                        <a href="eventcredits/" class="hover:text-gray-400">Gratitude</a>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+        <div class="">
+            <p class=" mt-4 md:mt-8 text-sm text-center ">©United International University</p>
+        </div>
+    </footer>
+
+    <script>
+        const limit = 5;
+        const minimum = 3;
+        const warnText = document.getElementById('warn-text');
+
+        if (document.getElementById('member-fields').children.length < minimum) {
+            document.getElementById('reg-btn').disabled = true;
+            change_color("gray");
+            warnText.hidden = false;
+        }
+
+        document.getElementById('reg-btn').addEventListener('mouseover', function () {
+            var btn = document.getElementById('reg-btn');
+            if (btn.disabled) {
+                btn.title = "Add at least 3 members to register";
+            } else {
+                btn.title = "";
+            }
+        });
+
+        document.getElementById('add-member-btn').addEventListener('click', function () {
+            const memberFields = document.getElementById('member-fields');
+            var newCard = memberFields.firstElementChild.cloneNode(true);
+            
+            // Determine the new member number
+            const newMemberNumber = memberFields.children.length + 1;
+
+            newCard.querySelector('#team').innerText = `Team Member - ${newMemberNumber}`;
+            
+            // Update all inputs and labels
+            const inputs = newCard.querySelectorAll('input, select, label');
+            inputs.forEach(input => {
+                if (input.id) {
+                    input.id = input.id.replace(/member-\d+/, `member-${newMemberNumber}`);
+                }
+                if (input.name) {
+                    input.name = input.name.replace(/member-\d+/, `member-${newMemberNumber}`);
+                }
+                if (input.htmlFor) {
+                    input.htmlFor = input.htmlFor.replace(/member-\d+/, `member-${newMemberNumber}`);
+                }
+            });
+            
+            memberFields.appendChild(newCard);
+
+            if (memberFields.children.length > limit - 1) {
+                document.getElementById('add-member-btn').hidden = true;
+                document.getElementById('add-member-btn').disabled = true;
+            }
+
+            if (memberFields.children.length >= minimum) {
+                var btn = document.getElementById('reg-btn');
+                btn.disabled = false;
+                btn.style.removeProperty('background-color');
+                warnText.hidden = true;
+            }
+        });
+
+        function change_color(color) {
+            var x = document.getElementById("reg-btn");
+            x.style.setProperty('background-color', color, 'important');
+        }
+    </script>
+</body>
+
+</html>
