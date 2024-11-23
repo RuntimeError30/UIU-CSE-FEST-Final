@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
@@ -146,35 +147,54 @@
         <div>
           <h1 class="text-white font-bold text-5xl mb-40">Events</h1>
         </div>
-        <div class="flex flex-wrap"> 
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10"> 
           {% for event in events %} 
-          <div class="reveal w-full space-y-10 p-10 mt-10 rounded-2xl text-white" style="border: 1px solid #ff4701;">
+          <div class="reveal w-full space-y-10 p-10 mt-10 rounded-2xl text-white text-center md:text-start" style="border: 1px solid #ff4701;">
              <!-- <img src="{{ event.event_image.url }}" alt="{{ event.title }}" class="w-full h-auto rounded-lg"> -->
-            <h1 class="text-sm md:text-sm font-bold">Event {{ forloop.counter }}</h1>
+            <h1 class="text-sm md:text-xl font-bold">Event {{ forloop.counter }}</h1>
             <h1 class="text-xl md:text-4xl font-bold">{{ event.title }}</h1>
             <h1 class="text-lg md:text-lg font-bold">{{ event.category }}</h1>
             <h1>{{ event.description }}</h1>
             <h1>
+             <div class="flex justify-start gap-4 items-center">
+              <i class="fa-solid fa-calendar-days fa-beat md:text-2xl" style="color: #ffffff;"></i>
               <p>Last Registration Date: {{ event.regLast }}</p>
+             </div>
             </h1>
-            <a href="{{ event.registration_Link }}" target="_blank" class="flex">
-              <span class="px-2 tracking-widest"> Register </span>
-              <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16"
-                class="w-10">
-                <path id="Path_10" data-name="Path 10"
-                  d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)">
-                </path>
-              </svg>
-            </a>
-            <a href="{% url 'eventdetails' event.signed_id %}" target="_blank" class="flex">
-              <span class="px-2 tracking-widest"> View Details</span>
-              <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16"
-                class="w-10">
-                <path id="Path_10" data-name="Path 10"
-                  d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)">
-                </path>
-              </svg>
-            </a>
+           
+            <div>
+              <button style="background: linear-gradient(to right, #ff4701,#d95420 );" class="text-black font-bold py-2 px-4 rounded-xl transform hover:translate-y-1 hover:shadow-lg transition duration-300 ease-in-out">
+                <a href="{{ event.registration_Link }}" target="_blank" class="flex text-white">
+                 <div class="flex justify-center items-center ">
+                  <span class="px-2 tracking-widest"> Register </span>
+                  <i class="fa-solid fa-arrow-right fa-shake md:text-3xl" style="color: #ffffff;"></i>
+                 </div>
+                  <!-- <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16" class="w-10">
+                    <path id="Path_10" data-name="Path 10"
+                      d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)">
+                    </path>
+                  </svg> -->
+                </a>
+              </button>
+            </div>
+          <div>
+           
+            <button style="background: linear-gradient(to right, #ff4701,#d95420 );" class="text-black font-bold py-2 px-4 rounded-xl transform hover:translate-y-1 hover:shadow-lg transition duration-300 ease-in-out">
+              <a href="{% url 'eventdetails' event.signed_id %}" target="_blank" class="flex text-white ">
+                <div class="flex justify-center items-center">
+                  <span class="px-2 tracking-widest"> View Details</span>
+                <i class="fa-solid fa-arrow-right fa-beat-fade md:text-3xl" style="color: #ffffff;"></i>
+                </div>
+                <!-- <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16"
+                  class="w-10">
+                  <path id="Path_10" data-name="Path 10"
+                    d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)">
+                  </path>
+                </svg> -->
+              </a>
+            </button>
+          </div>
+           
           </div> 
           {% endfor %} 
         </div>
