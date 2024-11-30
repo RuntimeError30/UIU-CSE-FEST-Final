@@ -97,7 +97,7 @@
                             <label class="block font-semibold text-gray-700" for="institute-name">University/Institute
                                 Name</label>
                             <input class="w-full shadow-inner bg-gray-100 rounded-lg text-lg p-4 mt-1 border-none"
-                                id="institute-name" type="text" name="institute-name" required
+                                id="institute-name" type="search" name="institute-name" required
                                 placeholder="e.g. United International University ..." />
                         </div>
                     </div>
@@ -370,7 +370,7 @@
                     }
                 });
             }
-            
+
             if (memberFields.children.length > limit - 1) {
                 document.getElementById('add-member-btn').hidden = true;
                 document.getElementById('add-member-btn').disabled = true;
