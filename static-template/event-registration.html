@@ -123,9 +123,11 @@
                 <div class="mt-10 grid grid-cols-1 gap-8" id="member-fields">
                     <!-- Initial Member Card -->
                     <div class="bg-white rounded-lg shadow-md p-6 w-full">
-                        <div class="flex">
-                            <i class="bi bi-person-lines-fill mx-2"></i>
-                            <h2 class="text-xl font-semibold text-gray-700 mb-4 text-center" style="font-size: larger !important;" id="team">Team Member - 1</h2>
+                        <div class="flex justify-between" id="remove-btn-holder">
+                            <div class="flex">
+                                <i class="bi bi-person-lines-fill mx-2"></i>
+                                <h2 class="text-xl font-semibold text-gray-700 mb-4 text-center" style="font-size: larger !important;" id="team">Team Member - 1</h2>
+                            </div>
                         </div>
                         <hr>
                         <br>
@@ -297,7 +299,16 @@
             // Determine the new member number
             const newMemberNumber = memberFields.children.length + 1;
 
-            newCard.querySelector('#team').innerText = `Team Member - ${newMemberNumber}`;
+            newCard.querySelector('#remove-btn-holder').innerHTML = `
+                <div class="flex" id="remove-btn-holder">
+                    <i class="bi bi-person-lines-fill mx-2"></i>
+                    <h2 class="text-xl font-semibold text-gray-700 mb-4 text-center" style="font-size: larger !important;" id="team">Team Member - ${newMemberNumber}</h2>
+                </div>
+                <div>
+                    <button type="button" class="ml-auto bg-black text-white px-2 py-1 rounded-md shadow hover:bg-red-700" style="font-size: 0.875rem;" onclick="deleteMember(this)">
+                        <i class="bi bi-trash-fill"></i>
+                    </button>
+                </div>`;
             
             // Update all inputs and labels
             const inputs = newCard.querySelectorAll('input, select, label');
@@ -331,6 +342,52 @@
         function change_color(color) {
             var x = document.getElementById("reg-btn");
             x.style.setProperty('background-color', color, 'important');
+        }
+
+        function deleteMember(button) {
+            const memberFields = document.getElementById('member-fields');
+            const memberCard = button.closest('.bg-white');
+            memberFields.removeChild(memberCard);
+
+            // Update the team member numbers
+            const memberCards = memberFields.children;
+            for (let i = 0; i < memberCards.length; i++) {
+                const memberNumber = i + 1;
+                const memberCard = memberCards[i];
+                memberCard.querySelector('#team').textContent = `Team Member - ${memberNumber}`;
+
+                // Update all inputs and labels
+                const inputs = memberCard.querySelectorAll('input, select, label');
+                inputs.forEach(input => {
+                    if (input.id) {
+                        input.id = input.id.replace(/member-\d+/, `member-${memberNumber}`);
+                    }
+                    if (input.name) {
+                        input.name = input.name.replace(/member-\d+/, `member-${memberNumber}`);
+                    }
+                    if (input.htmlFor) {
+                        input.htmlFor = input.htmlFor.replace(/member-\d+/, `member-${memberNumber}`);
+                    }
+                });
+            }
+            
+            if (memberFields.children.length > limit - 1) {
+                document.getElementById('add-member-btn').hidden = true;
+                document.getElementById('add-member-btn').disabled = true;
+            }
+
+            if (memberFields.children.length >= minimum) {
+                var btn = document.getElementById('reg-btn');
+                btn.disabled = false;
+                btn.style.removeProperty('background-color');
+                warnText.hidden = true;
+            }
+            else {
+                var btn = document.getElementById('reg-btn');
+                btn.disabled = true;
+                change_color("gray");
+                warnText.hidden = false;
+            }
         }
     </script>
 </body>
