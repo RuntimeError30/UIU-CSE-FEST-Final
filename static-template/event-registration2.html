@@ -140,10 +140,12 @@
                             </tbody>
                         </table>
                     </div>
-                    <button type="button" id="add-member-btn"
-                        class="mt-4 bg-black text-white px-3 py-2 rounded-md shadow hover:bg-orange-600">
-                        <i class="bi bi-person-fill-add mx-2"></i> Add Member
-                    </button>
+                    <div class="flex justify-center lg:justify-start">
+                        <button type="button" id="add-member-btn"
+                            class="mt-4 bg-black text-white px-3 py-2 rounded-md shadow hover:bg-orange-600">
+                            <i class="bi bi-person-fill-add mx-2"></i> Add Member
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Submit Button -->
@@ -262,28 +264,24 @@
             const modalBody = document.getElementById('modalInputGroups');
             modalBody.innerHTML = `
                 <div>
-                    <label for="fullName-member-${memberCount2}" class="block text-sm font-medium text-gray-700">Full Name</label>
                     <input type="text" id="fullName-member-${memberCount2}" name="fullName-member-${memberCount2}"
                         class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
                         placeholder="Enter your full name" required />
                 </div>
 
                 <div>
-                    <label for="email-member-${memberCount2}" class="block text-sm font-medium text-gray-700">Email</label>
                     <input type="email" id="email-member-${memberCount2}" name="email-member-${memberCount2}"
                         class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
                         placeholder="Enter your email" required />
                 </div>
 
                 <div>
-                    <label for="phone-member-${memberCount2}" class="block text-sm font-medium text-gray-700">Phone Number</label>
                     <input type="tel" id="phone-member-${memberCount2}" name="phone-member-${memberCount2}"
                         class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
                         placeholder="Enter your phone number" required />
                 </div>
 
                 <div>
-                    <label for="tshirtSize-member-${memberCount2}" class="block text-sm font-medium text-gray-700">T-shirt Size</label>
                     <select id="tshirtSize-member-${memberCount2}" name="tshirtSize-member-${memberCount2}"
                         class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
                         required>
@@ -297,7 +295,6 @@
                 </div>
 
                 <div>
-                    <label for="studentIdCard-member-${memberCount2}" class="block text-sm font-medium text-gray-700">Student ID Card (PDF)</label>
                     <input type="file" id="studentIdCard-member-${memberCount2}" name="studentIdCard-member-${memberCount2}"
                         accept="application/pdf"
                         class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
@@ -306,15 +303,13 @@
                 </div>
 
                 <div>
-                    <label for="studentImage-member-${memberCount2}" class="block text-sm font-medium text-gray-700">Student Image</label>
                     <input type="file" id="studentImage-member-${memberCount2}" name="studentImage-member-${memberCount2}" accept="image/*"
                         class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
                         required />
                     <p class="mt-1 text-sm text-gray-500">Upload a recent photo (JPEG, PNG).</p>
                 </div>
 
-                <div class="mt-3">
-                    <label for="role-member-${memberCount2}" class="block text-sm font-medium text-gray-700">Role</label>
+                <div class="mt-3 lg:col-span-2">
                     <select id="role-member-${memberCount2}" name="role-member-${memberCount2}"
                         class="w-full shadow-inner bg-gray-100 rounded-lg placeholder-gray text-lg p-4 mt-1 border-none"
                         required>
